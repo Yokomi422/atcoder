@@ -1,0 +1,16 @@
+int main() {
+    int n,m; cin >> n >> m;
+    // 初期化する必要があった 変な場所にアクセスすることを防ぐため
+    Graph G(n);
+    rep(i, 0, m) {
+        int a, b; cin >> a >> b;
+        a--; b--;
+        G[a].push_back(b);
+    }
+    rep(i, 0, n) {
+        rep(j, 0, G[i].size()) {
+            cout << G[i][j];
+        }
+        cout << endl;
+    }
+}

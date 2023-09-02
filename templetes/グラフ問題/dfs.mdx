@@ -1,0 +1,65 @@
+# スタックを用いた深さ優先探索
+
+```C++
+int main() {
+    int n,m; cin >> n >> m;
+    Graph G(n);
+    rep(i, 0, m) {
+        int a, b; cin >> a >> b;
+        G[a].push_back(b);
+    }
+    stack<int> todo;
+    vector<bool> seen(n, false);
+    // 初期化
+    seen[0] = true;
+    todo.push(0);
+    // この処理をしないと、サイクルがある場合などは無限ループになる可能性がある
+    while (!todo.empty()) {
+        int top = todo.top();
+        todo.pop();
+        for (int next: G[top]) {
+            if (!seen[next]) {
+                todo.push(next);
+                seen[next] = true;
+            }
+        }
+
+    }
+}
+```
+
+# 再帰関数を使った深さ優先探索
+
+```C++
+// 深さ優先探索
+void dfs(vector<bool> &visited, const Graph &G, int v)
+{
+    visited[v] = true;
+    cout << v << endl;
+    for (int point : G[v])
+    {
+        if (visited[point])
+            continue;
+        dfs(visited, G, point);
+    }
+}
+
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+    Graph G(n);
+    rep(i, 0, m)
+    {
+        int a, b;
+        cin >> a >> b;
+        G[a].push_back(b);
+    }
+    for (vector<int> &g : G)
+    {
+        sort(g.begin(), g.end());
+    }
+    vector<bool> visited(n, false);
+    dfs(visited, G, 0);
+}
+```
