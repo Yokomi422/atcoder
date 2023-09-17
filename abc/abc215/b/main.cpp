@@ -42,4 +42,14 @@ const long long INF = 1LL << 60;
 
 int main()
 {
+    string s;
+    int k;
+    cin >> s >> k;
+    vector<string> permutations;
+    sort(s.begin(), s.end());
+    do
+    {
+        permutations.push_back(s);
+    } while (next_permutation(s.begin(), s.end()));
+    cout << permutations[k - 1] << endl;
 }
